@@ -10,6 +10,18 @@ class ECSource {
         return head.val;
     }
 
+    public static <T> T recursiveGetNodeValue(Node<T> head, int index) {
+        if ( index == 0 && head != null ) {
+            return head.val;
+        } else {
+            if ( head == null ) {
+                return null;
+            } else {
+                return recursiveGetNodeValue(head.next, index - 1);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Test 1");
         Node<String> node1 = new Node<>("banana");
@@ -18,8 +30,12 @@ class ECSource {
         node1.next = node2;
         node2.next = node3;
         // banana -> mango -> kiwi
-        System.out.println(ECSource.getNodeValue(node1, 0));
-        System.out.println(ECSource.getNodeValue(node1, 2));
+        System.out.println("Iterative test: " + ECSource.getNodeValue(node1, 0));
+        System.out.println("Iterative test: " + ECSource.getNodeValue(node1, 0));
+        System.out.println("Iterative test: " + ECSource.getNodeValue(node1, 2));
+        System.out.println("Recursive test: " + ECSource.recursiveGetNodeValue(node1, 0));
+        System.out.println("Recursive test: " + ECSource.recursiveGetNodeValue(node1, 0));
+        System.out.println("Recursive test: " + ECSource.recursiveGetNodeValue(node1, 2));
 
 
         System.out.println("\nTest 2");
@@ -31,6 +47,7 @@ class ECSource {
         b.next = c;
         c.next = d;
         // a -> b -> c -> d
-        System.out.println(ECSource.getNodeValue(a, 7)); // null
+        System.out.println("Iterative test: " + ECSource.getNodeValue(a, 7)); // null
+        System.out.println("Recursive test: " + ECSource.recursiveGetNodeValue(a, 7)); // null
     }
 }
